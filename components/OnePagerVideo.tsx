@@ -10,6 +10,9 @@ type OnePagerVideoProps = {
   isLoading: boolean;
 };
 
+// I used react-player here instead of <iFrame> for no peticulur reason. 
+// I have just used react-player a bunch in the past and it has a great 
+// Built in API
 export const OnePagerVideo = ({
   onePagerData,
   isLoading,
