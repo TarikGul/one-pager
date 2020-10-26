@@ -29,6 +29,18 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     });
   }, []);
 
+  // I put this in here to get rid of an extra divider when the video url is not 
+  // available
+  const videoUrlDivider: any = () => {
+    if (onePagerData.pitchVideoLink) {
+      return (
+        <Diveder50 />
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <Box bg='#f2f4f5'>
       <Head>
@@ -51,8 +63,8 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
       <Diveder50 />
 
       <OnePagerVideo onePagerData={onePagerData} isLoading={isLoading} />
-
-      <Diveder50 />
+      {/* Checks to see if we have a url, if not will return no divider */}
+      {videoUrlDivider}
 
       <ContentCard isLoading={false}>
         <Flex justifyContent='center'>
