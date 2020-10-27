@@ -11,6 +11,7 @@ import { Header } from './Header';
 import { OnePagerOverview } from './OnePagerOverview';
 import { OnePagerFounders } from './OnePagerFounders';
 import { OnePagerFinances } from './OnePagerFinances';
+import { OnePagerCharts } from './OnePagerCharts';
 import { OnePagerVideo } from './OnePagerVideo';
 
 /** Renders a full one pager based on the onePagerUrl. */
@@ -65,6 +66,8 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
       <OnePagerVideo onePagerData={onePagerData} isLoading={isLoading} />
       {/* Checks to see if we have a url, if not will return no divider */}
       {videoUrlDivider}
+
+      <OnePagerCharts onePagerData={onePagerData} isLoading={isLoading}/>
 
       <ContentCard isLoading={false}>
         <Flex justifyContent='center'>
