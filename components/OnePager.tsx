@@ -43,15 +43,13 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
       setAccessTrial(false)
     }
 
-    // Thiis is a sanity check to make sure its not undefined
+    // This is a sanity check to make sure its not undefined
     if (!cachedAccessRights) {
-      setIsMember(false)
+      setIsMember(false);
     } else if(parsedAccessRights) {
-      // 
-      setIsMember(true)
+      // This authenticates that they payed.
+      setIsMember(true);
     }
-
-    console.log(isMember, accessTrial)
   }, []);
 
   // I put this in here to get rid of an extra divider when the video url is not 
@@ -60,9 +58,9 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     if (onePagerData.pitchVideoLink) {
       return (
         <Diveder50 />
-      )
+      );
     } else {
-      return null
+      return null;
     }
   };
 

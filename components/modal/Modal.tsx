@@ -24,7 +24,7 @@ export const OnePagerModal = () => {
         const localStorage = window.localStorage;
         localStorage.setItem('member', JSON.stringify(true));
 
-        setIsOpen(!isOpen)
+        setIsOpen(!isOpen);
     }
 
     return (
