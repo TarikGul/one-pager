@@ -14,7 +14,7 @@ export const OnePagerCharts = ({onePagerData, isLoading}: OnePagerChartTypes) =>
 
     return (
         <ContentCard title='Current User Growth vs Successfull Pairs' isLoading={isLoading}>
-            <UserGrowth />
+            <UserGrowth onePagerData={onePagerData}/>
         </ContentCard>
     )
 }

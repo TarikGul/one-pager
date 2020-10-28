@@ -4,55 +4,10 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
 
-const data = [
-    {
-        "name": "January", // This would always be formatted from a queried dataset
-        "Successfully Paired": 78,
-        "Active Users": 298,
-        "amt": 200
-    },
-    {
-        "name": "February",
-        "Successfully Paired": 89,
-        "Active Users": 480,
-        "amt": 218
-    },
-    {
-        "name": "March",
-        "Successfully Paired": 150,
-        "Active Users": 398,
-        "amt": 250
-    },
-    {
-        "name": "April",
-        "Successfully Paired": 200,
-        "Active Users": 240,
-        "amt": 210
-    },
-    {
-        "name": "May", 
-        "Successfully Paired": 149,
-        "Active Users": 530,
-        "amt": 340
-    },
-    {
-        "name": "June",
-        "Successfully Paired": 109,
-        "Active Users": 480,
-        "amt": 320
-    },
-    {
-        "name": "July",
-        "Successfully Paired": 400,
-        "Active Users": 1200,
-        "amt": 390
-    },
-]
-
-export const UserGrowth = () => {
+export const UserGrowth = ({onePagerData}) => {
     return (
         <div>
-            <AreaChart width={630} height={400} data={data}
+            <AreaChart width={630} height={400} data={onePagerData.chartData}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

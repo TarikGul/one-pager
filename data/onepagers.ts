@@ -1,6 +1,7 @@
 import { OnePagerData, OnePagerPublicData } from '../model/model';
 import * as founders from './founders';
 import * as investors from './investors';
+import * as chartData from './chartData';
 
 /** An empty one pager, for initial React state */
 export const EMPTY_ONE_PAGER: OnePagerData = {
@@ -9,6 +10,7 @@ export const EMPTY_ONE_PAGER: OnePagerData = {
   industryTags: [],
   briefDescription: '',
   founders: [],
+  chartData: [],
 };
 
 const facebook: OnePagerData = {
@@ -26,6 +28,7 @@ const facebook: OnePagerData = {
   founders: [founders.facebook1, founders.facebook2, founders.facebook3],
   pitchVideoLink: 'https://www.youtube.com/watch?v=WzgNAN3dW-I',
   investors: [investors.investor2],
+  chartData: chartData.userGrowthChartData,
 };
 
 const lendingClub: OnePagerData = {
@@ -41,6 +44,7 @@ const lendingClub: OnePagerData = {
   fundraisingDetails: 'Expand capabilities and accelerate customer growth',
   founders: [founders.lendingClub1, founders.lendingClub2],
   investors: [investors.investor1],
+  chartData: chartData.userGrowthChartData,
 };
 
 const spotify: OnePagerData = {
@@ -57,6 +61,7 @@ const spotify: OnePagerData = {
   founders: [founders.spotify1, founders.spotify2],
   pitchVideoLink: 'https://www.youtube.com/watch?v=ZDXETBfXSuc&t=166s',
   investors: [investors.investor1],
+  chartData: chartData.userGrowthChartData,
 };
 
 const workday: OnePagerData = {
@@ -72,6 +77,7 @@ const workday: OnePagerData = {
   fundraisingDetails: 'Develop software platform',
   founders: [founders.workday1, founders.workday2],
   investors: [investors.investor1, investors.investor2],
+  chartData: chartData.userGrowthChartData,
 };
 
 const zynga: OnePagerData = {
@@ -88,6 +94,7 @@ const zynga: OnePagerData = {
   founders: [founders.zynga1, founders.zynga2, founders.zynga3],
   pitchVideoLink: 'https://www.youtube.com/watch?v=HdVWHAPiqno',
   investors: [investors.investor1, investors.investor3],
+  chartData: chartData.userGrowthChartData,
 };
 
 /** Map of urls to full one pager data. */
