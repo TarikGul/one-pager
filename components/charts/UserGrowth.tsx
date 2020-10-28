@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
+    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
 
 const data = [
@@ -52,7 +52,7 @@ const data = [
 export const UserGrowth = () => {
     return (
         <div>
-            <AreaChart width={630} height={350} data={data}
+            <AreaChart width={630} height={400} data={data}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -68,6 +68,7 @@ export const UserGrowth = () => {
                 <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
+                <Legend />
                 <Area type="monotone" dataKey="Active Users" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                 <Area type="monotone" dataKey="Successfully Paired" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
             </AreaChart>
