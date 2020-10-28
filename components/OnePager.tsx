@@ -13,6 +13,7 @@ import { OnePagerFounders } from './OnePagerFounders';
 import { OnePagerFinances } from './OnePagerFinances';
 import { OnePagerCharts } from './OnePagerCharts';
 import { OnePagerVideo } from './OnePagerVideo';
+import { OnePagerModal } from './modal/Modal';
 
 /** Renders a full one pager based on the onePagerUrl. */
 export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
@@ -20,7 +21,7 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     EMPTY_ONE_PAGER
   );
   const [isLoading, setIsLoading]: [boolean, any] = React.useState(false);
-
+  const [access, setAccess]: [boolean, any] = React.useState(true);
   // Load data on first render.
   React.useEffect(() => {
     setIsLoading(true);
@@ -28,10 +29,18 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
       setOnePager(result);
       setIsLoading(false);
     });
+
+    const localStorage = window.localStorage;
+    const cachedUrls = localStorage.getItem('urls');
+    const urlData = JSON.parse(cachedUrls);
+
+    if (!urlData.includes(onePagerUrl) && urlData.length >= 2) {
+      setAccess(false)
+    }
   }, []);
 
   // I put this in here to get rid of an extra divider when the video url is not 
-  // available
+  // available it could definitely be more dynamic and perform a check for all dividers 
   const videoUrlDivider: any = () => {
     if (onePagerData.pitchVideoLink) {
       return (
@@ -44,6 +53,13 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
 
   return (
     <Box bg='#f2f4f5'>
+      {
+        access ? (
+          null
+        ) : (
+          <OnePagerModal/>
+        )
+      }
       <Head>
         <title>{isLoading ? onePagerUrl : onePagerData.companyName}</title>
         <link rel='icon' href='/favicon.png' />

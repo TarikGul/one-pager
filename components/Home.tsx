@@ -53,15 +53,42 @@ type OnePagerLinksProps = {
 };
 
 const OnePagerLinks = ({ onePagers }: OnePagerLinksProps) => {
+
+  // Adds url to local storage
+  const saveEventToLocalStorage = (url: string) => {
+    let localStorage = window.localStorage;
+    let storedUrls   = [url];
+    let cachedUrls   = localStorage.getItem('urls');
+
+    const data = JSON.parse(cachedUrls);
+
+    if (!cachedUrls) {
+      localStorage.setItem('urls', JSON.stringify(storedUrls));
+    } else if(data.length < 2) {
+      const updatedData = data.concat(storedUrls);
+
+      localStorage.removeItem('urls');
+      localStorage.setItem('urls', JSON.stringify(updatedData));
+    } 
+  }
+
+  const OnePagerLink = (onePagerData: OnePagerPublicData) => {
+    return (
+      <Box key={onePagerData.companyName} marginBottom='10px'>
+        <Link href='/[onePagerSlug]' as={`/${onePagerData.url}`}>
+          <a onClick={() => saveEventToLocalStorage(onePagerData.url)}>
+            {onePagerData.companyName}
+          </a>
+        </Link>
+        <Text margin='0'>{onePagerData.briefDescription}</Text>
+      </Box>
+    )
+  }
+
   return (
     <>
       {onePagers.map((onePagerData: OnePagerPublicData) => (
-        <Box key={onePagerData.companyName} marginBottom='10px'>
-          <Link href='/[onePagerSlug]' as={`/${onePagerData.url}`}>
-            <a>{onePagerData.companyName}</a>
-          </Link>
-          <Text margin='0'>{onePagerData.briefDescription}</Text>
-        </Box>
+        OnePagerLink(onePagerData)
       ))}
     </>
   );
