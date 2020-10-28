@@ -10,11 +10,12 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    useDisclosure
+    useToast
 } from "@chakra-ui/core";
 
 export const OnePagerModal = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const toast = useToast();
+    const [isOpen, setIsOpen]: [boolean, any] = useState(true);
 
     const handleClose = () => {
         Router.push('/');
@@ -24,6 +25,14 @@ export const OnePagerModal = () => {
         const localStorage = window.localStorage;
         localStorage.setItem('member', JSON.stringify(true));
 
+        toast({
+            title: "Payment Received.",
+            description: "We've received your payment. Thank you",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+        })
+
         setIsOpen(!isOpen);
     }
 
@@ -31,7 +40,7 @@ export const OnePagerModal = () => {
         <>
             {
                 isOpen ? (
-                    <Modal isOpen={true} onClose={() => handleClose()}>
+                    <Modal isOpen={true} onClose={() => handleClose()} >
                         <ModalOverlay />
                         <ModalContent>
                             <ModalHeader>Get Access Now!</ModalHeader>
