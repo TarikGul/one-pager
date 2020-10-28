@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Box, Flex, Divider } from '@chakra-ui/core';
@@ -17,11 +17,13 @@ import { OnePagerModal } from './modal/Modal';
 
 /** Renders a full one pager based on the onePagerUrl. */
 export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
-  const [onePagerData, setOnePager]: [OnePagerData, any] = React.useState(
+  const [onePagerData, setOnePager]: [OnePagerData, any] = useState(
     EMPTY_ONE_PAGER
   );
-  const [isLoading, setIsLoading]: [boolean, any] = React.useState(false);
-  const [access, setAccess]: [boolean, any] = React.useState(true);
+  const [isLoading, setIsLoading]: [boolean, any] = useState(false);
+  const [accessTrial, setAccessTrial]: [boolean, any] = useState(true);
+  const [isMember, setIsMember]: [boolean, any] = useState(false);
+
   // Load data on first render.
   React.useEffect(() => {
     setIsLoading(true);
@@ -30,13 +32,26 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
       setIsLoading(false);
     });
 
-    const localStorage = window.localStorage;
-    const cachedUrls = localStorage.getItem('urls');
-    const urlData = JSON.parse(cachedUrls);
+    // Retrieve all local storage data
+    const localStorage       = window.localStorage;
+    const cachedUrls         = localStorage.getItem('urls');
+    const cachedAccessRights = localStorage.getItem('member');
+    const parsedAccessRights = JSON.parse(cachedAccessRights);
+    const urlData            = JSON.parse(cachedUrls);
 
     if (!urlData.includes(onePagerUrl) && urlData.length >= 2) {
-      setAccess(false)
+      setAccessTrial(false)
     }
+
+    // Thiis is a sanity check to make sure its not undefined
+    if (!cachedAccessRights) {
+      setIsMember(false)
+    } else if(parsedAccessRights) {
+      // 
+      setIsMember(true)
+    }
+
+    console.log(isMember, accessTrial)
   }, []);
 
   // I put this in here to get rid of an extra divider when the video url is not 
@@ -49,12 +64,12 @@ export const OnePager = ({ onePagerUrl }: { onePagerUrl: string }) => {
     } else {
       return null
     }
-  }
+  };
 
   return (
     <Box bg='#f2f4f5'>
       {
-        access ? (
+        accessTrial || isMember ? (
           null
         ) : (
           <OnePagerModal/>
